@@ -75,7 +75,7 @@ public class Heap {
                     System.out.print(' ');
                 }
             }
-            System.out.print((j+1) + ". "+heapArray[j].getTask()+" ("+heapArray[j].getTanggal()+")");
+            System.out.print((j+1) + ". "+heapArray[j].getTask());
             if (++j == currentSize) {
                 break;
             }
@@ -189,32 +189,39 @@ public class Heap {
             System.out.format("+-----+-------------+-------------------------------+%n");
         }
     }
+    public Node remove(int k) {
+        Node root = heapArray[k];
 
-    public Node remove( int k )
-    {
-        int parent;
-        Node r;             // Variable to hold deleted value
-
-        r = heapArray[k];             // Save return value
-
-        heapArray[k] = heapArray[currentSize-1];     // Replace deleted node with the right most leaf
-        // This fixes the "complete bin. tree" property
-
-        currentSize--;             // One less node in heap....
-
-        parent = k/2;
-
-      /* =======================================================
-	 Filter a[k] up or down depending on the result of:
-		a[k] <==> a[k's parent]
-         ======================================================= */
-        if ( k == 1 /* k is root */ || heapArray[parent].getTanggal().compareTo(heapArray[k].getTanggal()) < 0 )
-            trickleDown(k);  // Move the node a[k] DOWN the tree
-        else
-            trickleUp(k);    // Move the node a[k] UP the tree
-
-        return r;         // Return deleted value...
+        heapArray[k] = heapArray[--currentSize];
+        trickleDown(k);
+        return root;
     }
+
+//    public Node remove( int k )
+//    {
+//        int parent;
+//        Node r;             // Variable to hold deleted value
+//
+//        r = heapArray[k];             // Save return value
+//
+//        heapArray[k] = heapArray[currentSize-1];     // Replace deleted node with the right most leaf
+//        // This fixes the "complete bin. tree" property
+//
+//        currentSize--;             // One less node in heap....
+//
+//        parent = k/2;
+//
+//      /* =======================================================
+//	 Filter a[k] up or down depending on the result of:
+//		a[k] <==> a[k's parent]
+//         ======================================================= */
+//        if ( k == 1 /* k is root */ || heapArray[parent].getTanggal().compareTo(heapArray[k].getTanggal()) < 0 )
+//            trickleDown(k);  // Move the node a[k] DOWN the tree
+//        else
+//            trickleUp(k);    // Move the node a[k] UP the tree
+//
+//        return r;         // Return deleted value...
+//    }
 
     public boolean isFull() {
         return (jml == maxSize);
@@ -222,5 +229,18 @@ public class Heap {
 
     public void tambahJumlah(int value) {
         maxSize += value;
+    }
+
+    public Node getDataByIndex(int index) {
+        Node data = null;
+
+        for (int i = 0; i < jml; i++) {
+            if (heapArray[i].getTask() == heapArray[index].getTask()) {
+                data = heapArray[i];
+                return data;
+            }
+        }
+
+        return null;
     }
 }
