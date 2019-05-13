@@ -1,5 +1,7 @@
 import javax.swing.*;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -52,7 +54,6 @@ public class Main {
                     }
                     break;
                 case '2':
-//                    heap.displayTable();
                     System.out.print("Pilih no. tugas untuk di ubah : ");
                     int no = getInt() - 1;
 
@@ -75,11 +76,18 @@ public class Main {
                                 SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
                                 Date date = format.parse(tanggal);
                                 data.tanggal = date;
+                                System.out.print("Apakah anda ingin mengubah jam tugas ? (y/n) ");
+                                c = getChar();
+                                if (c == 'y') {
+                                    System.out.print("Jam deadline (08:10) : ");
+                                    String jam = getString();
+                                    date = fromStrings(tanggal, jam);
+                                    data.tanggal = date;
+                                }
                             }else {
                                 System.out.println("input tanggal salah !!!");
                             }
                         }
-
                         heap.change(no, data.task, data.tanggal);
                         JOptionPane.showMessageDialog(null, "Tugas berhasil di ubah");
                     } else {
@@ -90,6 +98,8 @@ public class Main {
                     System.out.print("Masukkan No. tugas yang dihapus : ");
                     int key = getInt();
                     heap.remove(key-1);
+                    System.out.println("tugas berhasil dihapus !!");
+                    heap.displayTable();
                     heap.displayHeap();
                     break;
                 case '4':
@@ -107,8 +117,8 @@ public class Main {
     }
 
     public static String getString() throws IOException {
-        Scanner br = new Scanner(System.in);
-        String s = br.next();
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String s = br.readLine();
         return s;
     }
 
