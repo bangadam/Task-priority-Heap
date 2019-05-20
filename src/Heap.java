@@ -24,6 +24,7 @@ public class Heap {
         return true;
     }
 
+
     public void trickleUp(int index) {
         int parent = (index - 1) / 2;
         Node bottom = heapArray[index];

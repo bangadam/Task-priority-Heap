@@ -40,7 +40,7 @@ public class Main {
                         System.out.println("Masukkan nama tugas dan tanggal deadline");
                         System.out.print("Nama tugas : ");
                         String nama_tugas = getString();
-                        System.out.print("Tanggal deadline (hari-bulan-tahun): ");
+                        System.out.print("Tanggal deadline (dd-mm-yyyyy): ");
                         String tanggal = getString();
                         System.out.print("Jam deadline (08:10) : ");
                         String jam = getString();
@@ -70,7 +70,7 @@ public class Main {
                         System.out.print("Apakah anda ingin mengubah tanggal tugas ? (y/n) ");
                         c = getChar();
                         if (c == 'y') {
-                            System.out.print("Tanggal deadline (hari-bulan-tahun) : ");
+                            System.out.print("Tanggal deadline (dd-mm-yyyyy) : ");
                             String tanggal = getString();
                             if(tanggal.matches("\\d{2}-\\d{2}-\\d{4}")) {
                                 SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
