@@ -40,7 +40,7 @@ public class Main {
                         System.out.println("Masukkan nama tugas dan tanggal deadline");
                         System.out.print("Nama tugas : ");
                         String nama_tugas = getString();
-                        System.out.print("Tanggal deadline (dd-mm-yyyyy): ");
+                        System.out.print("Tanggal deadline (dd-mm-yyyy): ");
                         String tanggal = getString();
                         System.out.print("Jam deadline (08:10) : ");
                         String jam = getString();
@@ -70,7 +70,7 @@ public class Main {
                         System.out.print("Apakah anda ingin mengubah tanggal tugas ? (y/n) ");
                         c = getChar();
                         if (c == 'y') {
-                            System.out.print("Tanggal deadline (dd-mm-yyyyy) : ");
+                            System.out.print("Tanggal deadline (dd-mm-yyyy) : ");
                             String tanggal = getString();
                             if(tanggal.matches("\\d{2}-\\d{2}-\\d{4}")) {
                                 SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
@@ -87,6 +87,21 @@ public class Main {
                             }else {
                                 System.out.println("input tanggal salah !!!");
                             }
+                        }
+                        System.out.print("Apakah anda ingin mengubah jam deadline ? (y/n) ");
+                        c = getChar();
+                        if (c == 'y') {
+                            String tanggal = data.tanggal.toString();
+                            String[] arr = tanggal.split(" ");
+                            String hari = arr[2];
+                            String bulan = getBulan(arr[1]);
+                            System.out.println(arr[1]);
+                            String tahun = arr[5];
+                            String tanggalbaru = hari+"-"+bulan+"-"+tahun;
+                            System.out.print("Jam deadline (08:10) : ");
+                            String jam = getString();
+                            Date dates = fromStrings(tanggalbaru, jam);
+                            data.tanggal = dates;
                         }
                         heap.change(no, data.task, data.tanggal);
                         JOptionPane.showMessageDialog(null, "Tugas berhasil di ubah");
@@ -142,6 +157,36 @@ public class Main {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static String getBulan(String bulan) {
+        switch (bulan) {
+            case "Jan":
+                return "01";
+            case "Feb":
+                return "02";
+            case "Mar":
+                return "03";
+            case "Apr":
+                return "04";
+            case "May":
+                return "05";
+            case "Jun":
+                return "06";
+            case "Jul":
+                return "07";
+            case "Aug":
+                return "08";
+            case "Sep":
+                return "09";
+            case "Oct":
+                return "10";
+            case "Nov":
+                return "11";
+            case "Dec":
+                return "12";
+        }
+        return "";
     }
 
 }
